@@ -20,7 +20,8 @@ class Game < Chingu::Window
 	def initialize
 		super(WINDOW_HEIGHT,WINDOW_WIDTH,false)
 		self.caption = "My Window"
-		@player1 = Player.create(:x => 35, :y => 35)
+		self.input = { :escape => :close }
+		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 	end
 	
 	def setup
@@ -43,6 +44,10 @@ class Game < Chingu::Window
 	
 	def self.run
 		new.show
+	end
+	
+	def close
+		exit
 	end
 	
 end
