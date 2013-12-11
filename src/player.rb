@@ -4,7 +4,7 @@ class Player < Chingu::GameObject
 		options = {
 			x: 0,
 			y: 0,
-			image: 'christmas_man_1.png',
+			image: 'DefaultTile.png',
 			center_x: 0,
 			center_y: 0,
 			angle: 0,
