@@ -22,6 +22,8 @@ class Game < Chingu::Window
 		self.caption = "My Window"
 		self.input = { :escape => :close }
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
+		@tile1 = Tile.create(1, 1)
+		@tile2 = Tile.create(40, 40)
 	end
 	
 	def setup
@@ -31,6 +33,8 @@ class Game < Chingu::Window
 	def draw
 		draw_background
 		@player1.draw
+		@tile1.draw
+		@tile2.draw
 	end
 	
 	def draw_background
