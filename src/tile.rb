@@ -1,5 +1,4 @@
 class Tile < Chingu::GameObject
-	attr_accessor :grid_x
 
 	HEIGHT = 8
 	WIDTH = 8
@@ -24,4 +23,5 @@ class Tile < Chingu::GameObject
 	def draw
 		super()
 	end
+	
 end
