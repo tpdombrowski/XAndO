@@ -1,5 +1,7 @@
 class Player < Chingu::GameObject
 	
+	attr_accessor :count
+	
 	def initialize(options = {})
 		options = {
 			x: 0,
@@ -8,10 +10,10 @@ class Player < Chingu::GameObject
 			center_x: 0,
 			center_y: 0,
 			angle: 0,
-			factor_x: 0.5,
-			factor_y: 0.5,
+			factor_x: 1,
+			factor_y: 1,
 		}.merge! options
-		
+		@count = 0
 		super options
 	end
 	
@@ -25,6 +27,16 @@ class Player < Chingu::GameObject
 		self.zorder = 1
 		@speed = 4
    
+	end
+	
+	def update
+		super
+		if self.x > 639 or self.x < 1
+			self.x = self.x % 639
+			
+		elsif self.y > 479 or self.y < 1
+			self.y = self.y % 479
+		end
 	end
 	
 	def holding_left

@@ -39,6 +39,12 @@ class Game < Chingu::Window
 		if @player1.x > 400
 			@tile1.destroy
 		end
+
+	end
+	
+	def makeStars
+		pl = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
+		@player1.makemanyStars
 	end
 	
 	def draw_background
