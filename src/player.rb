@@ -33,10 +33,16 @@ class Player < Chingu::GameObject
 		super
 		if self.x > 639 or self.x < 1
 			self.x = self.x % 639
-			
+			self.makeNewPlayer	
+		
 		elsif self.y > 479 or self.y < 1
 			self.y = self.y % 479
+			self.makeNewPlayer
 		end
+	end
+	
+	def makeNewPlayer
+		@p = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 	end
 	
 	def holding_left

@@ -22,7 +22,7 @@ class Game < Chingu::Window
 		self.caption = "My Window"
 		self.input = { :escape => :close }
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
-		@tile1 = Tile.create(20, 20)
+		@tile1 = Tile.create(1, 0)
 	end
 	
 	def setup

@@ -3,8 +3,6 @@ class Map < Chingu::GameObject
 	
 	def initialize
 		super()
-		
-		@x, @y = 0, 1
 		@tiles = Array.new(2)
 		
 	end
