@@ -38,8 +38,12 @@ class Game < Chingu::Window
 		super
 		if @player1.x > 400
 			@tile1.destroy
+			
+		elsif Player.size > 100
+			Player.destroy_all
+			@player1 = Player.create(:x => 340, :y => 240)
 		end
-
+		
 	end
 	
 	def makeStars

@@ -1,6 +1,6 @@
 class Player < Chingu::GameObject
 	
-	attr_accessor :count
+	
 	
 	def initialize(options = {})
 		options = {
@@ -13,7 +13,7 @@ class Player < Chingu::GameObject
 			factor_x: 1,
 			factor_y: 1,
 		}.merge! options
-		@count = 0
+		
 		super options
 	end
 	
@@ -25,7 +25,7 @@ class Player < Chingu::GameObject
 					[:space]                     	=> :transform, }
     
 		self.zorder = 1
-		@speed = 4
+		@speed = 3
    
 	end
 	
@@ -38,11 +38,14 @@ class Player < Chingu::GameObject
 		elsif self.y > 479 or self.y < 1
 			self.y = self.y % 479
 			self.makeNewPlayer
+			
 		end
 	end
 	
 	def makeNewPlayer
-		@p = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
+		randomX = rand(50..590)
+		randomY = rand(50..430)
+		@p = Player.create(:x => randomX, :y => randomY)
 	end
 	
 	def holding_left
