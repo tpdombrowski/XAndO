@@ -6,7 +6,7 @@ class Player < Chingu::GameObject
 		options = {
 			x: 0,
 			y: 0,
-			image: 'DefaultTile.png',
+			image: 'spacecraft.png',
 			center_x: 0,
 			center_y: 0,
 			angle: 0,
@@ -24,7 +24,7 @@ class Player < Chingu::GameObject
 					[:holding_up,    :holding_w] 	=> :holding_up, 
 					[:space]                     	=> :transform, }
     
-		self.zorder = 1
+		self.zorder = 2
 		@speed = 3
    
 	end
@@ -65,19 +65,18 @@ class Player < Chingu::GameObject
 	end
 	
 	def transform
-		self.image = 'sprite1.png'
+		self.image = 'BLUE.png'
 	end
 	
 	def move(x,y)
-		self.factor_x = self.factor_x.abs   if x > 0
-		self.factor_x = -self.factor_x.abs  if x < 0
+	
+		#self.factor_x = self.factor_x.abs   if x > 0
+		#self.factor_x = -self.factor_x.abs  if x < 0
     
 		self.x += x
-    
 		self.y += y
 		
 		self.angle = self.angle + 5
-		
 		
 	end
 	

@@ -1,20 +1,19 @@
 class Tile < Chingu::GameObject
+	attr_reader :height, :width
 
-	HEIGHT = 8
-	WIDTH = 8
-	SPRITE_SHEET_COLUMNS = 8
-	
-	def z; 0; end
+	HEIGHT = 15
+	WIDTH = 15
+	@height, @width = HEIGHT, WIDTH
 	
 	def initialize(grid_x, grid_y, options = {})
 		options = { 
 				image: 'DefaultTile.png',
+				zorder: 1,
 			}.merge! options
 		
 		@grid_x, @grid_y = grid_x, grid_y
-		#@@sprites ||= SpriteSheet.new("tiles_8x8.png", HEIGHT, WIDTH, SPRITE_SHEET_COLUMNS)
 		
-		super(options)
+		super options
 		
 		self.x = (@grid_x + 0.5) * HEIGHT
 		self.y = (@grid_y + 0.5) * WIDTH
