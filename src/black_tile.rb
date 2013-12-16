@@ -8,4 +8,19 @@ class BlackTile < Tile
 		super(grid_x, grid_y, options)
 	end
 	
+	def setup
+		options = {
+			file: "DefaultTile.png",
+			width: 20,
+			height: 20,
+			delay: 3000,
+		}
+		@animation = Animation.new(options)
+	end
+	
+	def update
+		super()
+		@image = @animation.next
+	end
+	
 end

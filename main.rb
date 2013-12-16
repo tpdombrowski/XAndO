@@ -28,10 +28,6 @@ class Game < Chingu::Window
 	def setup
 		self.retrofy
 	end
-
-	def draw
-		super()
-	end
 	
 	def update
 		super()
@@ -44,11 +40,6 @@ class Game < Chingu::Window
 			@player1 = Player.create(:x => 340, :y => 240)
 		end
 		
-	end
-	
-	def makeStars
-		pl = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
-		@player1.makemanyStars
 	end
 	
 	def self.run
