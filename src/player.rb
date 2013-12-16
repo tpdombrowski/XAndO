@@ -14,7 +14,7 @@ class Player < Chingu::GameObject
 			factor_y: 1,
 		}.merge! options
 		
-		super options
+		super(options)
 	end
 	
 	def setup

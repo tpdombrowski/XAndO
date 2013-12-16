@@ -1,13 +1,10 @@
 class Tile < Chingu::GameObject
-	attr_reader :height, :width
-
-	HEIGHT = 15
-	WIDTH = 15
-	@height, @width = HEIGHT, WIDTH
+	HEIGHT = 20
+	WIDTH = 20
 	
 	def initialize(grid_x, grid_y, options = {})
 		options = { 
-				image: 'DefaultTile.png',
+				image: "DefaultTile.png",
 				zorder: 1,
 			}.merge! options
 		
@@ -18,9 +15,4 @@ class Tile < Chingu::GameObject
 		self.x = (@grid_x + 0.5) * HEIGHT
 		self.y = (@grid_y + 0.5) * WIDTH
 	end
-	
-	def draw
-		super()
-	end
-	
 end

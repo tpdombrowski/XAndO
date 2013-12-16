@@ -37,7 +37,7 @@ class Game < Chingu::Window
 		super()
 		
 		if @player1.x > 350
-			Tile.destroy_all
+			WhiteTile.destroy_all
 			
 		elsif Player.size > 100
 			Player.destroy_all
