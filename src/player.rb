@@ -1,5 +1,6 @@
 class Player < Chingu::GameObject
-	
+	trait :collision_detection
+	trait :bounding_box
 	
 	
 	def initialize(options = {})

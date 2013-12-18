@@ -40,6 +40,10 @@ class Game < Chingu::Window
 			@player1 = Player.create(:x => 340, :y => 240)
 		end
 		
+		@player1.each_bounding_box_collision(BlackTile) do |player, blacktile|
+			player.transform()
+		end
+		
 	end
 	
 	def self.run
