@@ -1,6 +1,8 @@
 class Tile < Chingu::GameObject
-	HEIGHT = 20
-	WIDTH = 20
+	trait :bounding_box
+	trait :collision_detection
+	HEIGHT = 40
+	WIDTH = 40
 	
 	def initialize(grid_x, grid_y, options = {})
 		options = { 

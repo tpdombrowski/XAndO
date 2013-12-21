@@ -13,37 +13,18 @@ require_rel 'src/*'
 DEBUG = false
 
 class Game < Chingu::Window
-	WINDOW_WIDTH = 480
-	WINDOW_HEIGHT = 640
+	WINDOW_WIDTH = 600
+	WINDOW_HEIGHT = 800
 	
 	def initialize
 		super(WINDOW_HEIGHT,WINDOW_WIDTH,false)
 		self.caption = "MakeStars.PlayerMakeStars.exe.avi.png"
-		self.input = { :escape => :close }
-		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
-		@thisMap = Map.create
-			
+		self.input = { :escape => :close }		
 	end
 	
 	def setup
 		self.retrofy
-	end
-	
-	def update
-		super()
-		
-		if @player1.x > 350
-			WhiteTile.destroy_all
-			
-		elsif Player.size > 100
-			Player.destroy_all
-			@player1 = Player.create(:x => 340, :y => 240)
-		end
-		
-		@player1.each_bounding_box_collision(BlackTile) do |player, blacktile|
-			player.transform()
-		end
-		
+		push_game_state(DefaultMap)
 	end
 	
 	def self.run

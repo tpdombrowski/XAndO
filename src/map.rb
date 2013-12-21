@@ -1,7 +1,8 @@
-class Map < Chingu::GameObject
+class Map < Chingu::GameState
 	BACKGROUND_COLOR = Gosu::Color.rgba(200, 100, 100, 200)
-	WINDOW_WIDTH = 480
-	WINDOW_HEIGHT = 640
+	WINDOW_WIDTH = 600
+	WINDOW_HEIGHT = 800
+	traits :viewport
 	
 	def initialize
 		super()
@@ -9,36 +10,18 @@ class Map < Chingu::GameObject
 	
 	def setup
 		self.create_tiles
-	end
-	
-	def generate_background
-		@background_image = TexPlay.create_image($window, $window.width, $window.height)
-		
-		$window.render_to_image(@background_image) do
-			all_tiles.each(&:draw)
-		end
-		@background_image.refresh_cache
+		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 	end
 	
 	def create_tiles
 		
-		# Current window size is 640 by 480 and 
-		# tile size is 20x20, so we have 32 
-		# across and 24 down.
-		rowSwitch = false
-		(0..32).each do |i|
-			(0..24).each do |q|
-				if ((q % 2) == 0)
-					rowSwitch = true
-				else
-					rowSwitch = false
-				end
-				
-				if (i % 2 == 0 && rowSwitch == true)
-					@tile = WhiteTile.create(i, q)
-				else
-					@tile = BlackTile.create(i, q)
-				end
+		# Current window size is 800 by 600 and 
+		# tile size is 40x40, so we have 20 
+		# across and 15 down.
+		(10..19).each do |i|
+			(0..14).each do |q|
+				@tile = WaterTile.create(i, q)
+				@shoreTile = ShoreTile.create(9, q)
 			end
 		end
 		
@@ -47,6 +30,14 @@ class Map < Chingu::GameObject
 	def draw
 		super()
 		self.generate_background
+	end
+	
+	def update
+		super()
+		
+		@player1.each_bounding_box_collision(WaterTile) do |player|
+			player.transform_boat
+		end
 	end
 	
 	def generate_background
@@ -59,3 +50,5 @@ class Map < Chingu::GameObject
 	end
 
 end
+
+class DefaultMap < Map; end

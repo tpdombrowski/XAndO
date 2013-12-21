@@ -7,7 +7,7 @@ class Player < Chingu::GameObject
 		options = {
 			x: 0,
 			y: 0,
-			image: 'spacecraft.png',
+			image: "pirate_front.png",
 			center_x: 0,
 			center_y: 0,
 			angle: 0,
@@ -23,7 +23,7 @@ class Player < Chingu::GameObject
                     [:holding_right, :holding_d]    => :holding_right, 
 					[:holding_down,  :holding_s] 	=> :holding_down, 
 					[:holding_up,    :holding_w] 	=> :holding_up, 
-					[:space]                     	=> :transform, }
+					[:space]                     	=> :transform_boat, }
     
 		self.zorder = 2
 		@speed = 3
@@ -32,52 +32,48 @@ class Player < Chingu::GameObject
 	
 	def update
 		super
-		if self.x > 639 or self.x < 1
-			self.x = self.x % 639
-			self.makeNewPlayer	
+		if self.x > 799 or self.x < 1
+			self.x = self.x % 799
 		
-		elsif self.y > 479 or self.y < 1
-			self.y = self.y % 479
-			self.makeNewPlayer
-			
+		elsif self.y > 599 or self.y < 1
+			self.y = self.y % 599
 		end
 	end
 	
 	def makeNewPlayer
-		randomX = rand(50..590)
-		randomY = rand(50..430)
+		randomX = rand(50..750)
+		randomY = rand(50..550)
 		@p = Player.create(:x => randomX, :y => randomY)
 	end
 	
 	def holding_left
 		move(-@speed, 0)
+		self.image = "pirate_lside.png"
 	end
 	
 	def holding_right
 		move(@speed, 0)
+		self.image = "pirate_rside.png"
 	end
 	
 	def holding_up
 		move(0, -@speed)
+		self.image = "pirate_back.png"
 	end
 	
 	def holding_down
 		move(0, @speed)
+		self.image = "pirate_front.png"
 	end
 	
-	def transform
-		self.image = 'BLUE.png'
+	def transform_boat
+		self.image = "ship1.png"
 	end
 	
 	def move(x,y)
-	
-		#self.factor_x = self.factor_x.abs   if x > 0
-		#self.factor_x = -self.factor_x.abs  if x < 0
-    
+
 		self.x += x
 		self.y += y
-		
-		self.angle = self.angle + 5
 		
 	end
 	
