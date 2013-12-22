@@ -1,6 +1,7 @@
 class Player < Chingu::GameObject
 	trait :collision_detection
 	trait :bounding_box
+	attr_accessor :canMove
 	
 	
 	def initialize(options = {})
@@ -27,16 +28,13 @@ class Player < Chingu::GameObject
     
 		self.zorder = 2
 		@speed = 3
-   
 	end
 	
 	def update
-		super
-		if self.x > 799 or self.x < 1
-			self.x = self.x % 799
+		super()
 		
-		elsif self.y > 599 or self.y < 1
-			self.y = self.y % 599
+		self.each_bounding_box_collision(WaterTile) do
+			self.transform_boat
 		end
 	end
 	
@@ -47,8 +45,8 @@ class Player < Chingu::GameObject
 	end
 	
 	def holding_left
-		move(-@speed, 0)
 		self.image = "pirate_lside.png"
+		move(-@speed, 0)
 	end
 	
 	def holding_right
@@ -71,10 +69,8 @@ class Player < Chingu::GameObject
 	end
 	
 	def move(x,y)
-
 		self.x += x
 		self.y += y
-		
 	end
 	
 end
