@@ -17,6 +17,7 @@ class Map < Chingu::GameState
 		
 		self.create_tiles
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
+		@zombie = Zombie.create(:x => 45, :y => 550)
 	end
 	
 	def create_tiles
@@ -51,6 +52,15 @@ class Map < Chingu::GameState
 			@player1.x = 1599
 		elsif @player1.y > 599 or @player1.y < 1
 			@player1.y = @player1.y % 599
+		end
+		
+		
+		if @zombie.x < 1
+			@zombie.x = 1
+		elsif @zombie.x > 1599
+			@zombie.x = 1599
+		elsif @zombie.y > 599 or @zombie.y < 1
+			@zombie.y = @zombie.y % 599
 		end
 		
 		if (@player1.x > 800)

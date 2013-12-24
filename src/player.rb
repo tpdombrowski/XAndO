@@ -38,12 +38,6 @@ class Player < Chingu::GameObject
 		end
 	end
 	
-	def makeNewPlayer
-		randomX = rand(50..750)
-		randomY = rand(50..550)
-		@p = Player.create(:x => randomX, :y => randomY)
-	end
-	
 	def holding_left
 		self.image = "pirate_lside.png"
 		move(-@speed, 0)
