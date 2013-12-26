@@ -24,7 +24,7 @@ class Player < Chingu::GameObject
                     [:holding_right, :holding_d]    => :holding_right, 
 					[:holding_down,  :holding_s] 	=> :holding_down, 
 					[:holding_up,    :holding_w] 	=> :holding_up, 
-					[:space]                     	=> :transform_boat, }
+					[:space]                     	=> :shoot_harpoon, }
     
 		self.zorder = 2
 		@speed = 3
@@ -60,6 +60,10 @@ class Player < Chingu::GameObject
 	
 	def transform_boat
 		self.image = "ship1.png"
+	end
+	
+	def shoot_harpoon
+		@harpoon = Harpoon.create(:x => self.x+30, :y => self.y+20)
 	end
 	
 	def move(x,y)

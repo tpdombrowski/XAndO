@@ -18,6 +18,7 @@ class Map < Chingu::GameState
 		self.create_tiles
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 		@zombie = Zombie.create(:x => 45, :y => 550)
+		@whale = Whale.create(:x => 1350, :y => 450)
 	end
 	
 	def create_tiles
