@@ -1,5 +1,5 @@
 class WaterTile < Tile
-		trait :animation
+	trait :animation
 	
 		def initialize(grid_x, grid_y, options = {})
 			options = {

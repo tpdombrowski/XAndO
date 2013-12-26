@@ -2,7 +2,8 @@ class Map < Chingu::GameState
 	BACKGROUND_COLOR = Gosu::Color.rgba(200, 100, 100, 200)
 	WINDOW_WIDTH = 600
 	WINDOW_HEIGHT = 1600
-	traits :viewport
+	trait :viewport
+	trait :asynchronous
 	
 	def initialize
 		super()
@@ -19,6 +20,7 @@ class Map < Chingu::GameState
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 		@zombie = Zombie.create(:x => 45, :y => 550)
 		@whale = Whale.create(:x => 1350, :y => 450)
+		@zombie.async.tween(3000, :x => 1400, :y => 100)
 	end
 	
 	def create_tiles

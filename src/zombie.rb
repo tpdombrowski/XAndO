@@ -1,5 +1,6 @@
 class Zombie < Enemy
 	trait :animation
+	trait :asynchronous
 	
 	def initialize(options = {})
 		options = {
@@ -12,7 +13,6 @@ class Zombie < Enemy
 	
 	def update
 		super()
-		self.move(0, -@speed)
 	end
 	
 end
