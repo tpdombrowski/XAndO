@@ -14,11 +14,6 @@ class Weapon < Chingu::GameObject
 	
 	def update
 		super()
-		
-		self.each_bounding_box_collision(Whale) do |weapon, whale|
-			whale.death
-			Weapon.destroy_all
-		end
 	end
 	
 	def move(x, y)

@@ -1,6 +1,6 @@
 class Map < Chingu::GameState
 	BACKGROUND_COLOR = Gosu::Color.rgba(200, 100, 100, 200)
-	WINDOW_WIDTH = 600
+	WINDOW_WIDTH = 1200
 	WINDOW_HEIGHT = 1600
 	trait :viewport
 	trait :asynchronous
@@ -13,14 +13,14 @@ class Map < Chingu::GameState
 		#Set the game_area.  This is a rectangle representing
 		#the entire area of the map, not just the area that the
 		#player is currently viewing.
-		self.viewport.game_area = [0, 0, 1600, 600]
+		self.viewport.game_area = [0, 0, WINDOW_HEIGHT, WINDOW_WIDTH]
 		self.viewport.lag = 0.95
 		
 		self.create_tiles
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 		@zombie = Zombie.create(:x => 45, :y => 550)
 		@whale = Whale.create(:x => 1350, :y => 450)
-		@zombie.async.tween(3000, :x => 1400, :y => 100)
+		@zombie.async.tween(15000, :x => 1400, :y => 100)
 	end
 	
 	def create_tiles
@@ -53,10 +53,11 @@ class Map < Chingu::GameState
 			@player1.x = 1
 		elsif @player1.x > 1599
 			@player1.x = 1599
-		elsif @player1.y > 599 or @player1.y < 1
-			@player1.y = @player1.y % 599
-		end
-		
+		elsif @player1.y > 1200
+			@player1.y = 1200 
+		elsif @player1.y < 1
+			@player1.y = 1
+		end		
 		
 		if @zombie.x < 1
 			@zombie.x = 1
@@ -70,6 +71,12 @@ class Map < Chingu::GameState
 			self.viewport.x_target = 800
 		else
 			self.viewport.x_target = 0
+		end
+		
+		if (@player1.y > 600)
+			self.viewport.y_target = 600
+		else
+			self.viewport.y_target = 0
 		end
 		
 	end

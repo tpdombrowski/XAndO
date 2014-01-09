@@ -1,6 +1,7 @@
 class Player < Chingu::GameObject
 	trait :collision_detection
 	trait :bounding_box
+	attr_accessor :facing
 	attr_accessor :canMove
 	
 	
@@ -28,6 +29,7 @@ class Player < Chingu::GameObject
     
 		self.zorder = 2
 		@speed = 3
+		@facing = :south
 	end
 	
 	def update
@@ -36,26 +38,31 @@ class Player < Chingu::GameObject
 		self.each_bounding_box_collision(WaterTile) do
 			self.transform_boat
 		end
+		
 	end
 	
 	def holding_left
-		self.image = "pirate_lside.png"
 		move(-@speed, 0)
+		self.image = "pirate_lside.png"
+		@facing = :west
 	end
 	
 	def holding_right
 		move(@speed, 0)
 		self.image = "pirate_rside.png"
+		@facing = :east
 	end
 	
 	def holding_up
 		move(0, -@speed)
 		self.image = "pirate_back.png"
+		@facing = :north
 	end
 	
 	def holding_down
 		move(0, @speed)
 		self.image = "pirate_front.png"
+		@facing = :south
 	end
 	
 	def transform_boat
@@ -63,7 +70,15 @@ class Player < Chingu::GameObject
 	end
 	
 	def shoot_harpoon
-		@harpoon = Harpoon.create(:x => self.x+30, :y => self.y+20)
+		if (@facing == :east)
+			@harpoon = Harpoon.create(@facing, :x => self.x+30, :y => self.y+10, :scale => 0.5)
+		elsif (@facing == :west)
+			@harpoon = Harpoon.create(@facing, :x => self.x-30, :y => self.y+10, :angle => 180, :scale => 0.5)
+		elsif (@facing == :south)
+			@harpoon = Harpoon.create(@facing, :x => self.x, :y => self.y+20, :angle => 90, :scale => 0.5)
+		elsif (@facing == :north)
+			@harpoon = Harpoon.create(@facing, :x => self.x, :y => self.y-20, :angle => 270, :scale => 0.5)
+		end
 	end
 	
 	def move(x,y)
