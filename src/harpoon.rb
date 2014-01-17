@@ -32,6 +32,12 @@ class Harpoon < Weapon
 			harpoon.destroy
 			whale.death
 		end
+
+		self.each_bounding_box_collision(Zombie) do |harpoon, zombie|
+			harpoon.destroy
+			zombie.hit
+			zombie.hitCheck(1)
+		end
 		
 	end
 	

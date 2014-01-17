@@ -20,7 +20,7 @@ class Map < Chingu::GameState
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 		@zombie = Zombie.create(:x => 45, :y => 550)
 		@whale = Whale.create(:x => 1350, :y => 450)
-		@zombie.async.tween(15000, :x => 1400, :y => 100)
+		
 	end
 	
 	def create_tiles
@@ -38,12 +38,34 @@ class Map < Chingu::GameState
 		#Generate a couple trees to see if they stop movement as they should
 		@tree = Boundary.create(2, 3)
 		@tree = Boundary.create(8, 5)
-		
+		@tree = Boundary.create(7, 19)
+		@tree = Boundary.create(35, 26)
+		@tree = Boundary.create(24, 17)
+		@rock = Rock.create(17,17)
+		@rock = Rock.create(4,21)
+		@rock = Rock.create(31,28)
+		@trunk = Trunk.create(30,19)
+		@trunk = Trunk.create(25,22)
+		@trunk = Trunk.create(12,23)
+		@flower = Flower.create(32,18)
+		@flower = Flower.create(3, 5)
+		@flower = Flower.create(6, 11)
+		@flower = Flower.create(2, 13)
+		@flower = Flower.create(12, 20)
+		@flower = Flower.create(11, 21)
+		@flower = Flower.create(12, 21)
+		@flower = Flower.create(11, 20)
+		@flower = Flower.create(5, 26)
+		@bush = Bush.create(7, 1)
+		@bush = Bush.create(15,21)
+		@bush = Bush.create(31, 24)
+
 	end
 	
 	def draw
 		super()
 		self.generate_background
+		
 	end
 	
 	def update
@@ -63,8 +85,8 @@ class Map < Chingu::GameState
 			@zombie.x = 1
 		elsif @zombie.x > 1599
 			@zombie.x = 1599
-		elsif @zombie.y > 599 or @zombie.y < 1
-			@zombie.y = @zombie.y % 599
+		elsif @zombie.y > 1599 or @zombie.y < 1
+			@zombie.y = @zombie.y % 1599
 		end
 		
 		if (@player1.x > 800)
@@ -79,6 +101,8 @@ class Map < Chingu::GameState
 			self.viewport.y_target = 0
 		end
 		
+		@zombie.moveTowardsPlayer(@player1.x, @player1.y)
+
 	end
 	
 	def generate_background

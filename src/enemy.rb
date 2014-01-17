@@ -1,6 +1,7 @@
 class Enemy < Chingu::GameObject
 	trait :collision_detection
 	trait :bounding_box
+	trait :asynchronous
 	
 	def initialize(options = {})
 		options = {
@@ -16,7 +17,7 @@ class Enemy < Chingu::GameObject
 		super()
 		
 		self.each_bounding_box_collision(Player) do |enemy, player|
-			player.transform_boat
+			player.transform_x
 		end
 	end
 	
@@ -24,5 +25,6 @@ class Enemy < Chingu::GameObject
 		self.x += x
 		self.y += y
 	end
+
 	
 end

@@ -28,7 +28,7 @@ class Player < Chingu::GameObject
 					[:space]                     	=> :shoot_harpoon, }
     
 		self.zorder = 2
-		@speed = 3
+		@speed = 4
 		@facing = :south
 	end
 	
@@ -38,9 +38,10 @@ class Player < Chingu::GameObject
 		self.each_bounding_box_collision(WaterTile) do
 			self.transform_boat
 		end
-		
+
 	end
 	
+
 	def holding_left
 		move(-@speed, 0)
 		self.image = "pirate_lside.png"
@@ -66,7 +67,11 @@ class Player < Chingu::GameObject
 	end
 	
 	def transform_boat
-		self.image = "ship1.png"
+		self.image = "poop_ship.png"
+	end
+	
+	def transform_x
+		self.image = "red.png"
 	end
 	
 	def shoot_harpoon
