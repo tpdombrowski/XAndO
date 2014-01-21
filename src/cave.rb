@@ -1,0 +1,3 @@
+class Cave < Tile
+	
+end

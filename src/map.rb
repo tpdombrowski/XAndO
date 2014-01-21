@@ -19,8 +19,13 @@ class Map < Chingu::GameState
 		self.create_tiles
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 		@zombie = Zombie.create(:x => 45, :y => 550)
+<<<<<<< Updated upstream
 		@whale = Whale.create(:x => 1350, :y => 450)
 		
+=======
+		
+		@zombie.async.tween(5000, :x => 700, :y => 100)
+>>>>>>> Stashed changes
 	end
 	
 	def create_tiles

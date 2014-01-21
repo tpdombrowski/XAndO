@@ -1,8 +1,11 @@
 class Zombie < Enemy
 	trait :animation
 	trait :asynchronous
+<<<<<<< Updated upstream
 
 	@@numHits = 1
+=======
+>>>>>>> Stashed changes
 	
 	def initialize(options = {})
 		options = {
