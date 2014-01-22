@@ -1,7 +1,7 @@
 class Map < Chingu::GameState
 	BACKGROUND_COLOR = Gosu::Color.rgba(200, 100, 100, 200)
-	WINDOW_WIDTH = 1200
 	WINDOW_HEIGHT = 1600
+	WINDOW_WIDTH = 1200
 	trait :viewport
 	trait :asynchronous
 	
@@ -10,22 +10,18 @@ class Map < Chingu::GameState
 	end
 	
 	def setup
+		
 		#Set the game_area.  This is a rectangle representing
 		#the entire area of the map, not just the area that the
 		#player is currently viewing.
 		self.viewport.game_area = [0, 0, WINDOW_HEIGHT, WINDOW_WIDTH]
 		self.viewport.lag = 0.95
-		
 		self.create_tiles
+		
 		@player1 = Player.create(:x => 35, :y => 35, :center_x => 40, :center_y => 40)
 		@zombie = Zombie.create(:x => 45, :y => 550)
-<<<<<<< Updated upstream
 		@whale = Whale.create(:x => 1350, :y => 450)
 		
-=======
-		
-		@zombie.async.tween(5000, :x => 700, :y => 100)
->>>>>>> Stashed changes
 	end
 	
 	def create_tiles
@@ -70,44 +66,26 @@ class Map < Chingu::GameState
 	def draw
 		super()
 		self.generate_background
-		
 	end
 	
 	def update
-		super()
-		
-		if @player1.x < 1
-			@player1.x = 1
-		elsif @player1.x > 1599
-			@player1.x = 1599
-		elsif @player1.y > 1200
-			@player1.y = 1200 
-		elsif @player1.y < 1
-			@player1.y = 1
-		end		
-		
-		if @zombie.x < 1
-			@zombie.x = 1
-		elsif @zombie.x > 1599
-			@zombie.x = 1599
-		elsif @zombie.y > 1599 or @zombie.y < 1
-			@zombie.y = @zombie.y % 1599
-		end
-		
-		if (@player1.x > 800)
-			self.viewport.x_target = 800
+		super()	
+		self.adjust_viewport()
+		@zombie.moveTowardsPlayer(@player1.x, @player1.y)
+	end
+	
+	def adjust_viewport
+		if ((@player1.x / 800) >= 1)
+			self.viewport.x_target = (@player1.x / 800) * 800
 		else
 			self.viewport.x_target = 0
 		end
 		
-		if (@player1.y > 600)
-			self.viewport.y_target = 600
+		if ((@player1.y / 600) >= 1)
+			self.viewport.y_target = (@player1.y / 600) * 600
 		else
 			self.viewport.y_target = 0
 		end
-		
-		@zombie.moveTowardsPlayer(@player1.x, @player1.y)
-
 	end
 	
 	def generate_background

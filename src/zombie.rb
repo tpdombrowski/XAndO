@@ -1,26 +1,24 @@
 class Zombie < Enemy
 	trait :animation
 	trait :asynchronous
-<<<<<<< Updated upstream
-
-	@@numHits = 1
-=======
->>>>>>> Stashed changes
 	
 	def initialize(options = {})
 		options = {
 			image: "zombie_front.png"
 		}.merge! options
 		@speed = 2.1
+		@numHits = 1
 		
 		super(options)
 	end
 	
 	def update
 		super()
+		
 		self.each_bounding_box_collision(WaterTile) do
-			transform_ship
+			transform_ship()
 		end
+		
 	end
 	
 	def transform_ship
@@ -35,13 +33,6 @@ class Zombie < Enemy
 		self.image = "zombie_front.png"
 	end
 
-	def hitCheck(num)
-		@@numHits += num
-		if @@numHits > 5
-			self.destroy
-		end
-	end
-
 	def hit
 		self.async do |q|
 			2.times do
@@ -49,6 +40,14 @@ class Zombie < Enemy
 				q.wait 100
 				q.call :norm
 			end
+		end
+		self.hitCheck(1)
+	end
+	
+	def hitCheck(num)
+		@numHits += num
+		if @numHits > 5
+			self.destroy
 		end
 	end
 
@@ -69,7 +68,6 @@ class Zombie < Enemy
 		else
 			self.move(0,0)
 		end
-		
 		
 	end
 

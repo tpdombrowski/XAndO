@@ -10,6 +10,7 @@ include Gosu
 include Chingu
 
 require_rel 'src/*'
+require 'texplay'
 DEBUG = false
 
 class Game < Chingu::Window
@@ -18,7 +19,6 @@ class Game < Chingu::Window
 	
 	def initialize
 		super(WINDOW_HEIGHT,WINDOW_WIDTH,false)
-		self.caption = "MakeStars.PlayerMakeStars.exe.avi.png"
 		self.input = { :escape => :close }		
 	end
 	
@@ -31,8 +31,13 @@ class Game < Chingu::Window
 		new.show
 	end
 	
+	def update
+		super()
+		self.caption = "FPS: #{self.fps}"
+	end
+	
 	def close
-		exit
+		exit()
 	end
 	
 end

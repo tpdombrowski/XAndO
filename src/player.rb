@@ -29,7 +29,9 @@ class Player < Chingu::GameObject
     
 		self.zorder = 2
 		@speed = 4
+		@health = 3
 		@facing = :south
+		@healthImage = Gosu::Image.new($window, "media/hearts_full.png", false)
 	end
 	
 	def update
@@ -38,9 +40,39 @@ class Player < Chingu::GameObject
 		self.each_bounding_box_collision(WaterTile) do
 			self.transform_boat
 		end
-
+		
+		self.restrict()
+		
 	end
 	
+	def restrict
+		if self.x < 1
+			self.x = 1
+		elsif self.x > 1599
+			self.x = 1599
+		elsif self.y > 1200
+			self.y = 1200 
+		elsif self.y < 1
+			self.y = 1
+		end	
+	end
+	
+	def draw
+		super()
+		draw_health()
+	end
+	
+	def draw_health
+		if ((self.x / 800) >= 1 && (self.y / 600 >= 1))
+			@healthImage.draw(((self.x / 800) * 800), ((self.y / 600) * 600), 3, 0.2, 0.2)
+		elsif (self.x / 800 >= 1)
+			@healthImage.draw(((self.x / 800) * 800), 0, 3, 0.2, 0.2)
+		elsif (self.y / 600 >= 1)
+			@healthImage.draw(0, ((self.y / 600) * 600), 3, 0.2, 0.2)
+		else
+			@healthImage.draw(0, 0, 3, 0.2, 0.2)
+		end
+	end
 
 	def holding_left
 		move(-@speed, 0)
@@ -83,6 +115,25 @@ class Player < Chingu::GameObject
 			@harpoon = Harpoon.create(@facing, :x => self.x, :y => self.y+20, :angle => 90, :scale => 0.5)
 		elsif (@facing == :north)
 			@harpoon = Harpoon.create(@facing, :x => self.x, :y => self.y-20, :angle => 270, :scale => 0.5)
+		end
+		
+		self.adjust_health()
+	end
+	
+	def adjust_health
+		# paints a heart black depending on current health
+		# texplay gets fooled by those slightly off-color red pixels,
+		# though, so will have to pinpoint those pixels to fill them
+		if (@health == 3)
+			@healthImage.fill(275, 25, :color => :black)
+			@health -= 1
+		elsif (@health == 2)
+			@healthImage.fill(150, 25, :color => :black)
+			@health -= 1
+		else
+			@healthImage.fill(25, 25, :color => :black)
+			@health -= 1
+			$window.push_game_state(GameOver)
 		end
 	end
 	

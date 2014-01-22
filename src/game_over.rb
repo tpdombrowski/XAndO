@@ -10,9 +10,10 @@ class GameOver < Chingu::GameState
 		
 		@messageMajor = Chingu::Text.new("Game Over", :x => 200, :y => 200, :zorder => 5, 
 									:size => 100, :font => 'Comic Sans MS')
-		@messageMinor = Chingu::Text.new("And worse, this game over screen is in Comic Sans", 
-										:x => 180, :y => 290, :zorder => 5, :size => 25, 
+		@messageMinor = Chingu::Text.new("And worse, this screen is in Comic Sans", 
+										:x => 215, :y => 290, :zorder => 5, :size => 25, 
 										:font => 'Comic Sans MS')
+										
 	end
 	
 	def draw
@@ -29,6 +30,6 @@ class GameOver < Chingu::GameState
 	end
 	
 	def endGame
-		$window.exit()
+		exit()
 	end
 end

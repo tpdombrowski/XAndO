@@ -36,7 +36,6 @@ class Harpoon < Weapon
 		self.each_bounding_box_collision(Zombie) do |harpoon, zombie|
 			harpoon.destroy
 			zombie.hit
-			zombie.hitCheck(1)
 		end
 		
 	end
