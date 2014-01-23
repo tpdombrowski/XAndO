@@ -1,6 +1,5 @@
 class Harpoon < Weapon
 	trait :animation
-	trait :viewport
 	attr_accessor :facing
 	
 	def initialize(direction, options = {})

@@ -1,8 +1,7 @@
 class Player < Chingu::GameObject
 	trait :collision_detection
 	trait :bounding_box
-	attr_accessor :facing
-	attr_accessor :canMove
+	attr_accessor :facing, :canMove, :health
 	
 	
 	def initialize(options = {})
@@ -42,7 +41,6 @@ class Player < Chingu::GameObject
 		end
 		
 		self.restrict()
-		
 	end
 	
 	def restrict
@@ -50,8 +48,8 @@ class Player < Chingu::GameObject
 			self.x = 1
 		elsif self.x > 1599
 			self.x = 1599
-		elsif self.y > 1200
-			self.y = 1200 
+		elsif self.y > 1199
+			self.y = 1199 
 		elsif self.y < 1
 			self.y = 1
 		end	
@@ -135,6 +133,7 @@ class Player < Chingu::GameObject
 			@health -= 1
 			$window.push_game_state(GameOver)
 		end
+		
 	end
 	
 	def move(x,y)

@@ -36,8 +36,10 @@ class Map < Chingu::GameState
 			end
 		end
 		
+		@cave = Cave.create(4, 2)
+		
 		#Generate a couple trees to see if they stop movement as they should
-		@tree = Boundary.create(2, 3)
+        @tree = Boundary.create(2, 3)
 		@tree = Boundary.create(8, 5)
 		@tree = Boundary.create(7, 19)
 		@tree = Boundary.create(35, 26)
@@ -60,7 +62,7 @@ class Map < Chingu::GameState
 		@bush = Bush.create(7, 1)
 		@bush = Bush.create(15,21)
 		@bush = Bush.create(31, 24)
-
+		
 	end
 	
 	def draw
