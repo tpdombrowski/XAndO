@@ -1,6 +1,7 @@
 class Player < Chingu::GameObject
 	trait :collision_detection
 	trait :bounding_box
+	trait :animation
 	attr_accessor :facing, :canMove, :health
 	
 	
@@ -25,21 +26,25 @@ class Player < Chingu::GameObject
 					[:holding_down,  :holding_s] 	=> :holding_down, 
 					[:holding_up,    :holding_w] 	=> :holding_up, 
 					[:space]                     	=> :shoot_harpoon, }
-    
+					
+		options = {
+			file: "hearts_fullssheet.png",
+			width: 360,
+			height: 110,
+			delay: 0, 
+		}
+		
+    	@heartSheetAnimation = Animation.new(options)
+		@healthImage = @heartSheetAnimation.first
+		
 		self.zorder = 2
 		@speed = 4
 		@health = 3
 		@facing = :south
-		@healthImage = Gosu::Image.new($window, "media/hearts_full.png", false)
 	end
 	
 	def update
 		super()
-		
-		self.each_bounding_box_collision(WaterTile) do
-			self.transform_boat
-		end
-		
 		self.restrict()
 	end
 	
@@ -123,15 +128,15 @@ class Player < Chingu::GameObject
 		# texplay gets fooled by those slightly off-color red pixels,
 		# though, so will have to pinpoint those pixels to fill them
 		if (@health == 3)
-			@healthImage.fill(275, 25, :color => :black)
+			@healthImage = @heartSheetAnimation.next
 			@health -= 1
 		elsif (@health == 2)
-			@healthImage.fill(150, 25, :color => :black)
+			@healthImage = @heartSheetAnimation.next
 			@health -= 1
 		else
-			@healthImage.fill(25, 25, :color => :black)
+			@healthImage = @heartSheetAnimation.next
 			@health -= 1
-			$window.push_game_state(GameOver)
+			#$window.push_game_state(GameOver)
 		end
 		
 	end

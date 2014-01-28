@@ -11,11 +11,6 @@ class Cave < Tile
 	
 	def update
 		super()
-		
-		self.each_collision(Player) do
-			WaterTile.destroy_all()
-			$window.push_game_state(Inside_Cave)
-		end
 	end
 
 end

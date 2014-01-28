@@ -10,7 +10,6 @@ include Gosu
 include Chingu
 
 require_rel 'src/*'
-require 'texplay'
 DEBUG = false
 
 class Game < Chingu::Window
@@ -19,11 +18,12 @@ class Game < Chingu::Window
 	
 	def initialize
 		super(WINDOW_HEIGHT,WINDOW_WIDTH,false)
-		self.input = { :escape => :close }		
+		self.input = { :escape => :close }	
+		transitional_game_state(Chingu::GameStates::FadeTo, {:speed => 5, :debug => true})		
 	end
 	
 	def setup
-		self.retrofy
+		self.retrofy()
 		push_game_state(DefaultMap)
 	end
 	

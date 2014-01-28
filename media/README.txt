@@ -1,1 +1,1 @@
-This is where pictures and video files would theoretically go if I wasn't an idiot
+Image and (eventually) sound files for the game

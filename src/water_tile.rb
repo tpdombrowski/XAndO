@@ -23,6 +23,10 @@ class WaterTile < Tile
 		def update
 			super()
 			@image = @animation.next
+			
+			self.each_bounding_box_collision(Player) do |waterTile, player|
+				player.transform_boat()
+			end
 		end
 	
 end

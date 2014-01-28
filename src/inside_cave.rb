@@ -1,5 +1,5 @@
 class Inside_Cave < Chingu::GameState
-	CAVE_BACKGROUND_COLOR = Gosu::Color.rgba(50, 50, 50, 100)
+	CAVE_BACKGROUND_COLOR = Gosu::Color.rgba(100, 50, 50, 100)
 	
 	
 	def initialize

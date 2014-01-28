@@ -36,7 +36,7 @@ class Map < Chingu::GameState
 			end
 		end
 		
-		@cave = Cave.create(4, 2)
+		@cave = Cave.create(4, 3)
 		
 		#Generate a couple trees to see if they stop movement as they should
         @tree = Boundary.create(2, 3)
@@ -74,6 +74,11 @@ class Map < Chingu::GameState
 		super()	
 		self.adjust_viewport()
 		@zombie.moveTowardsPlayer(@player1.x, @player1.y)
+		
+		Cave.each_collision(Player) do
+			switch_game_state(Inside_Cave)
+		end
+
 	end
 	
 	def adjust_viewport
@@ -98,6 +103,7 @@ class Map < Chingu::GameState
 		WINDOW_HEIGHT,    WINDOW_WIDTH, 	BACKGROUND_COLOR,
 		0)
 	end
+	
 
 end
 
